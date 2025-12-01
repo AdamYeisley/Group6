@@ -133,5 +133,3 @@ CREATE OR REPLACE TRIGGER validate_employee_insert
 BEFORE INSERT ON employee
 FOR EACH ROW
 EXECUTE FUNCTION trg_validate_employee_insert();
-
--- TRUNCATE TABLE company, country, employee RESTART IDENTITY; -- Run before running data_cleaning.ipynb
