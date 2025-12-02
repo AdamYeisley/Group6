@@ -2,6 +2,8 @@ from helper_functions import create_key, merge_df, read_sql
 from dotenv import load_dotenv
 from sqlalchemy import create_engine
 import os
+from helper_functions import create_key, merge_df, graphIt
+import matplotlib.pyplot as plt
 import pytest
 import pandas as pd
 
@@ -81,3 +83,11 @@ def test_read_sql_case_3():
 
     #Assert
     pd.testing.assert_frame_equal(result, expected_df)
+    
+#use pytest --mpl
+@pytest.mark.mpl_image_compare
+def test_graphIt():
+
+    df = pd.DataFrame({"X": ['A', 'B', 'C'], "Y": [10, 20, 15], "Z": [1, 2, 3]})
+    figure = graphIt(df)
+    return figure
