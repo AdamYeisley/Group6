@@ -133,3 +133,5 @@ CREATE OR REPLACE TRIGGER validate_employee_insert
 BEFORE INSERT ON employee
 FOR EACH ROW
 EXECUTE FUNCTION trg_validate_employee_insert();
+
+--TRUNCATE TABLE employee, country, company RESTART IDENTITY
