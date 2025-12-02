@@ -1,7 +1,9 @@
+from helper_functions import create_key, merge_df, read_sql
+from dotenv import load_dotenv
+from sqlalchemy import create_engine
+import os
 from helper_functions import create_key, merge_df, graphIt
 import matplotlib.pyplot as plt
-
-#Imports
 import pytest
 import pandas as pd
 
@@ -28,6 +30,60 @@ def test_merge_df():
     #Assert
     pd.testing.assert_frame_equal(result, expected_df)
 
+def test_read_sql_case_1():
+    #Arrange
+    load_dotenv() 
+    DATABASE_URL = os.getenv("DATABASE_URL")
+    engine = create_engine(DATABASE_URL)
+
+    expected_df = pd.DataFrame({
+        "job_title": ["Data Science Tech Lead", "Head of Machine Learning", "Finance Data Analyst"],
+        "avg": [375000.0, 337000.0,	323905.0]
+    })
+
+    #Act
+    result = read_sql(engine, 1, ("US", ))
+
+    #Assert
+    pd.testing.assert_frame_equal(result, expected_df)
+
+def test_read_sql_case_2():
+     #Arrange
+    load_dotenv() 
+    DATABASE_URL = os.getenv("DATABASE_URL")
+    engine = create_engine(DATABASE_URL)
+
+    expected_df = pd.DataFrame({
+        "size": ["M", "L", "M", "M", "M", "M", "M", "L", "S", "S"],
+        "name": ["MX", "US", "US", "NZ", "CA", "EG", "AU", "CH", "CA", "US"],
+        "avg": [208987.500000, 163915.671815, 156712.045342, 154015.000000, 149693.092637,
+                140869.230769, 138695.209302, 137323.142857, 119045.500000, 114857.164179]
+    })
+
+    #Act
+    result = read_sql(engine, 2)
+
+    #Assert
+    pd.testing.assert_frame_equal(result, expected_df)
+
+def test_read_sql_case_3():
+     #Arrange
+    load_dotenv() 
+    DATABASE_URL = os.getenv("DATABASE_URL")
+    engine = create_engine(DATABASE_URL)
+
+    expected_df = pd.DataFrame({
+        "name": ["US", "NZ", "CA", "EG", "MX", "AU", "CH", "JP", "UA", "IE"],
+        "avg": [156904.423130, 146761.250000, 145918.096703, 140869.230769, 129240.600000,
+                127800.701754, 124646.888889, 110821.625000, 105600.000000, 104694.916667]
+    })
+
+    #Act
+    result = read_sql(engine, 3)
+
+    #Assert
+    pd.testing.assert_frame_equal(result, expected_df)
+    
 #use pytest --mpl
 @pytest.mark.mpl_image_compare
 def test_graphIt():
