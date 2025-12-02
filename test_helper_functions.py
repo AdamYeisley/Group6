@@ -28,6 +28,7 @@ def test_merge_df():
     #Assert
     pd.testing.assert_frame_equal(result, expected_df)
 
+#use pytest --mpl
 @pytest.mark.mpl_image_compare
 def test_graphIt():
 
