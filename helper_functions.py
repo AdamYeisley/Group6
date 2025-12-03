@@ -46,6 +46,15 @@ def read_sql(e, q_type: int, p=(None, )):
                     ORDER BY avg DESC 
                     LIMIT 10
                     """
+        case 4:
+            query = """
+                    SELECT co.name, e.year, AVG(salary_usd) FROM company c
+                    JOIN country co on c.countryID = co.countryID 
+                    JOIN employee e ON c.companyID = e.companyID
+                    WHERE co.name = %s AND e.year >= 2022
+                    GROUP BY co.name, e.year
+                    ORDER BY co.name, e.year
+                    """
         case _:
             query = "None"
     return pd.read_sql(query, e, params=p)
