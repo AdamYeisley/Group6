@@ -51,15 +51,15 @@ def read_sql(e, q_type: int, p=(None, )):
     return pd.read_sql(query, e, params=p)
 
 def graphIt(df):
-    fig, (plt1, plt2) = plt.subplots(2, 1, figsize=(6, 8))
+    fig, (plt1, plt2) = plt.subplots(1, 2, figsize=(14,6))
 
-    plt1.bar(df.iloc[:,0], df.iloc[:,1])
-    plt1.set_xlabel(df.iloc[:,0].name)
-    plt1.set_ylabel(df.iloc[:,1].name)
+    plt1.bar(df.iloc[:,0], df.iloc[:,1], color='darkviolet', edgecolor='fuchsia', alpha=0.9)
+    plt1.set_xlabel('EXP Level', fontsize=12, fontweight='bold')
+    plt1.set_ylabel('Average Salary', fontsize=12, fontweight='bold')
 
-    plt2.scatter(df.iloc[:,0], df.iloc[:,1], df.iloc[:,2])
-    plt2.set_xlabel(df.iloc[:,0].name)
-    plt2.set_ylabel(df.iloc[:,1].name)
+    plt2.scatter(df.iloc[:,0], df.iloc[:,1], df.iloc[:,2], color='darkviolet', edgecolor='fuchsia', alpha=0.5)
+    plt2.set_xlabel('EXP Level', fontsize=12, fontweight='bold')
+    plt2.set_ylabel('Average Salary', fontsize=12, fontweight='bold')
     plt2.set_ylim(0, None)
     plt.close(fig)
 
