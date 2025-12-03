@@ -134,4 +134,7 @@ BEFORE INSERT ON employee
 FOR EACH ROW
 EXECUTE FUNCTION trg_validate_employee_insert();
 
---TRUNCATE TABLE employee, country, company RESTART IDENTITY
+ALTER TABLE employee
+ADD COLUMN experience_level CHAR(2);
+
+-- TRUNCATE TABLE employee, country, company RESTART IDENTITY
